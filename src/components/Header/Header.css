@@ -1,0 +1,54 @@
+/* Header Styling */
+.header {
+    padding: 20px 40px;
+    background-color: #4CAF50; /* Green background */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Title Styling */
+  .header-title {
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  /* Navbar Link Styling */
+  .header-nav {
+    display: inline-block;
+  }
+  
+  .header-link {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .header-link:hover {
+    color: #388E3C; /* Darker green on hover */
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .header {
+      padding: 15px 20px;
+    }
+  
+    .header-title {
+      font-size: 1.8rem;
+    }
+  
+    .header-nav {
+      display: block;
+    }
+  
+    .header-link {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+  }
+  

@@ -1,0 +1,158 @@
+/* General Checkout Page Styling */
+.checkout {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Styling */
+  .checkout h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .checkout h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #4CAF50;
+  }
+  
+  /* Cart Summary Section */
+  .cart-summary {
+    margin-bottom: 30px;
+  }
+  
+  .cart-summary h3 {
+    color: #4CAF50;
+    font-size: 1.2em;
+  }
+  
+  .cart-summary div {
+    margin-bottom: 10px;
+  }
+  
+  .cart-summary p {
+    font-size: 1em;
+    color: #555;
+  }
+  
+  /* Billing Details Section */
+  .billing-details input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    box-sizing: border-box;
+  }
+  
+  .billing-details input:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  
+  .billing-details button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .billing-details button:hover {
+    background-color: #388E3C;
+  }
+  
+  /* Payment Method Selection */
+  .payment-method {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .payment-method select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    margin-right: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Form Containers */
+  .billing-details,
+  .payment-method {
+    margin-bottom: 30px;
+  }
+  
+  /* Empty Cart Message */
+  .empty-cart-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    margin-top: 20px;
+  }
+  
+  /* Total Price Styling */
+  .total-price {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  /* Checkout Summary */
+  .checkout-summary {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .checkout-summary h3 {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .checkout {
+      padding: 20px;
+    }
+  
+    .checkout h1 {
+      font-size: 1.8em;
+    }
+  
+    .checkout h2 {
+      font-size: 1.4em;
+    }
+  
+    .checkout-summary {
+      padding: 15px;
+    }
+  
+    .billing-details input {
+      font-size: 0.9em;
+    }
+  
+    .total-price {
+      font-size: 1.2em;
+    }
+  }
+  

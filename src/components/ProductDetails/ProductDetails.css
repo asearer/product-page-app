@@ -1,0 +1,124 @@
+/* Product Details Container */
+.product-details {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    overflow: hidden; /* Ensures modal stays within the container */
+  }
+  
+  .product-details:hover {
+    transform: translateY(-5px); /* Hover animation */
+  }
+  
+  /* Product Image Styling */
+  .product-details img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-details:hover img {
+    transform: scale(1.05); /* Zoom effect on hover */
+  }
+  
+  /* Product Title */
+  .product-details h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin: 15px 0;
+  }
+  
+  /* Price Styling */
+  .product-details .price {
+    font-size: 1.4em;
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Add to Cart Button Styling */
+  .product-details button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .product-details button:hover {
+    background-color: #e65100; /* Darker shade for hover */
+  }
+  
+  /* Hover Modal Styling */
+  .product-info-modal {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10; /* Ensure modal is on top of the product card */
+  }
+  
+  /* Show Modal on Hover */
+  .product-details:hover .product-info-modal {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Modal Heading */
+  .product-info-modal h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+  }
+  
+  /* Modal Description */
+  .product-info-modal p {
+    font-size: 1em;
+    line-height: 1.5;
+  }
+  
+  /* Mobile Responsive Styling */
+  @media screen and (max-width: 768px) {
+    .product-details {
+      padding: 15px;
+    }
+  
+    .product-details h2 {
+      font-size: 1.6em;
+    }
+  
+    .product-details p {
+      font-size: 0.9em;
+    }
+  
+    .product-details img {
+      max-width: 100%;
+    }
+  
+    .product-info-modal {
+      width: 90%;
+      max-width: none;
+      font-size: 0.9em;
+    }
+  }
+  
+  
