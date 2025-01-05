@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
 import ProductGrid from "./components/ProductGrid/ProductGrid";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Cart from "./components/Cart/Cart";
@@ -47,33 +48,58 @@ export const useCart = () => useContext(CartContext);
 
 const App = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    fetchProducts().then(setProducts);
+    fetchProducts().then((data) => {
+      setProducts(data);
+      setFilteredProducts(data);
+    });
   }, []);
+
+  const handleFilterChange = (filters) => {
+    let filtered = products;
+
+    if (filters.category) {
+      filtered = filtered.filter(product => product.category === filters.category);
+    }
+    if (filters.priceRange) {
+      const [min, max] = filters.priceRange.split('-').map(Number);
+      filtered = filtered.filter(product => product.price >= min && (!max || product.price <= max));
+    }
+    if (filters.rating) {
+      filtered = filtered.filter(product => product.rating.rate >= parseInt(filters.rating));
+    }
+
+    setFilteredProducts(filtered);
+  };
 
   return (
     <CartProvider>
       <Router>
         <Navbar />
-        <Routes>
-          <Route
-            path="/"
-            element={<ProductGrid products={products} />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ProductDetails products={products} />}
-          />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-        </Routes>
+        <div className="app-container">
+          <Sidebar onFilterChange={handleFilterChange} />
+          <Routes>
+            <Route
+              path="/"
+              element={<ProductGrid products={filteredProducts} />}
+            />
+            <Route
+              path="/product/:id"
+              element={<ProductDetails products={products} />}
+            />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </div>
       </Router>
     </CartProvider>
   );
 };
 
 export default App;
+
 
 
 
