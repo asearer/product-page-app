@@ -1,0 +1,70 @@
+/* src/components/Footer/Footer.css */
+
+.footer {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 30px 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-left {
+  font-size: 1rem;
+}
+
+.footer-center {
+  flex: 1;
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-links li {
+  margin: 0 15px;
+}
+
+.footer-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.footer-links li a:hover {
+  text-decoration: underline;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #ffcc00; /* You can change this hover effect to match your brand's color */
+}

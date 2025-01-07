@@ -6,6 +6,7 @@ import ProductGrid from "./components/ProductGrid/ProductGrid";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Cart from "./components/Cart/Cart";
 import Checkout from "./components/Checkout/Checkout";
+import Footer from "./components/Footer/Footer";
 import { fetchProducts } from "./components/api";
 import './App.css';
 
@@ -93,12 +94,14 @@ const App = () => {
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </div>
+        <Footer />
       </Router>
     </CartProvider>
   );
 };
 
 export default App;
+
 
 
 
