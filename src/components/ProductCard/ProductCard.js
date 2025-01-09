@@ -1,30 +1,49 @@
-import React, { useState } from "react";
-import { useCart } from "../../context/CartContext"; 
-import "../ProductCard/ProductCard.css";
+import React from 'react';
+import { useCart } from '../../context/CartContext';
+import { Link } from 'react-router-dom';
+import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
-  const { addToCart } = useCart();
-  const [isHovered, setIsHovered] = useState(false);
+  const cartContext = useCart();
+  console.log('Cart Context:', cartContext);
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    console.log('Add to cart clicked for product:', product);
+    
+    if (!cartContext.addToCart) {
+      console.error('addToCart function is not available in context');
+      return;
+    }
+    
+    try {
+      cartContext.addToCart(product);
+      console.log('Product added to cart successfully');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
+  };
 
   return (
-    <div
-      className="product-card"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <img src={product.image} alt={product.name} />
-      <h3>{product.name}</h3>
-      <p>${product.price.toFixed(2)}</p>
-
-      {/* Show the modal on hover */}
-      {isHovered && (
-        <div className="product-info-modal">
-          <h3>Product Details</h3>
-          <p>{product.description}</p>
+    <div className="product-card">
+      <Link to={`/product/${product.id}`}>
+        <img src={product.image} alt={product.title} className="product-image" />
+        <div className="product-info">
+          <h3>{product.title}</h3>
+          <p className="price">${product.price}</p>
+          <div className="rating">
+            <span>★ {product.rating.rate}</span>
+            <span>({product.rating.count} reviews)</span>
+          </div>
         </div>
-      )}
-
-      <button onClick={() => addToCart(product)}>Add to Cart</button>
+      </Link>
+      <button 
+        className="add-to-cart-button"
+        onClick={handleAddToCart}
+        type="button"
+      >
+        Add to Cart
+      </button>
     </div>
   );
 };

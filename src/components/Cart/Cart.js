@@ -1,9 +1,14 @@
 import React from "react";
-import "../Cart/Cart.css";
+import { useCart } from "../../context/CartContext";
+import "./Cart.css";
 
-const Cart = ({ cartItems = [], onRemove }) => {
-  // Ensure that cartItems is always an array
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+const Cart = () => {
+  const { cartItems, addToCart, removeFromCart, deleteFromCart } = useCart();
+
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * (item.quantity || 1),
+    0
+  );
 
   return (
     <div className="cart">
@@ -11,18 +16,47 @@ const Cart = ({ cartItems = [], onRemove }) => {
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item.id}>
-              <h3>{item.name}</h3>
-              <p>Quantity: {item.quantity}</p>
-              <p>Price: ${item.price.toFixed(2)}</p>
-              <button onClick={() => onRemove(item.id)}>Remove</button>
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className="cart-items">
+            {cartItems.map((item) => (
+              <li key={item.id} className="cart-item">
+                <div className="cart-item-image">
+                  <img src={item.image} alt={item.title} />
+                </div>
+                <div className="cart-item-details">
+                  <h3>{item.title}</h3>
+                  <div className="quantity-controls">
+                    <button 
+                      onClick={() => removeFromCart(item.id)}
+                      className="quantity-button"
+                    >
+                      -
+                    </button>
+                    <span className="quantity">{item.quantity || 1}</span>
+                    <button 
+                      onClick={() => addToCart(item)}
+                      className="quantity-button"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <p>Price: ${item.price.toFixed(2)}</p>
+                  <p>Subtotal: ${(item.price * (item.quantity || 1)).toFixed(2)}</p>
+                  <button 
+                    onClick={() => deleteFromCart(item.id)}
+                    className="remove-button"
+                  >
+                    Remove Item
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="cart-summary">
+            <h3>Total: ${totalPrice.toFixed(2)}</h3>
+          </div>
+        </>
       )}
-      <h3>Total: ${totalPrice.toFixed(2)}</h3>
     </div>
   );
 };

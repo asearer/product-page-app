@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../../App";
+import { useCart } from "../../context/CartContext";
 import { FaHome, FaShoppingCart, FaMoneyBillWave } from "react-icons/fa"; // Importing icons from react-icons
 import "../Navbar/Navbar.css";
 
 const Navbar = () => {
   const { cartItems } = useCart();
 
-  // Count total items in the cart
-  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  // Calculate total items in cart
+  const cartItemCount = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
 
   return (
     <nav className="navbar">

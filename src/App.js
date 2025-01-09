@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -9,53 +9,30 @@ import Checkout from "./components/Checkout/Checkout";
 import Footer from "./components/Footer/Footer";
 import { fetchProducts } from "./components/api";
 import './App.css';
-
-// Create a Cart Context
-const CartContext = createContext();
-
-// Cart Provider Component
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-
-  const handleAddToCart = (product) => {
-    setCartItems((prev) => {
-      const exists = prev.find((item) => item.id === product.id);
-      if (exists) {
-        return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      return [...prev, { ...product, quantity: 1 }];
-    });
-  };
-
-  const handleRemoveFromCart = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
-  };
-
-  return (
-    <CartContext.Provider value={{ cartItems, handleAddToCart, handleRemoveFromCart, clearCart }}>
-      {children}
-    </CartContext.Provider>
-  );
-};
-
-// Custom Hook for Using Cart Context
-export const useCart = () => useContext(CartContext);
+import { CartProvider } from './context/CartContext';
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchProducts().then((data) => {
-      setProducts(data);
-      setFilteredProducts(data);
-    });
+    const loadProducts = async () => {
+      try {
+        setIsLoading(true);
+        const data = await fetchProducts();
+        setProducts(data);
+        setFilteredProducts(data);
+      } catch (err) {
+        setError(err.message);
+        console.error('Failed to fetch products:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
   }, []);
 
   const handleFilterChange = (filters) => {
@@ -75,6 +52,10 @@ const App = () => {
     setFilteredProducts(filtered);
   };
 
+  if (error) {
+    return <div className="error-message">Error loading products: {error}</div>;
+  }
+
   return (
     <CartProvider>
       <Router>
@@ -84,7 +65,13 @@ const App = () => {
           <Routes>
             <Route
               path="/"
-              element={<ProductGrid products={filteredProducts} />}
+              element={
+                isLoading ? (
+                  <div className="loading">Loading products...</div>
+                ) : (
+                  <ProductGrid products={filteredProducts} />
+                )
+              }
             />
             <Route
               path="/product/:id"
