@@ -12,22 +12,13 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-left">
-        <Link to="/" className="navbar-link">
-          <FaHome size={24} />
-          <span>Home</span>
-        </Link>
+      <div className="navbar-brand">
+        <Link to="/">Shop</Link>
       </div>
-      <div className="navbar-center">
-        <Link to="/cart" className="navbar-link">
-          <FaShoppingCart size={24} />
-          <span>Cart ({cartItemCount})</span>
-        </Link>
-      </div>
-      <div className="navbar-right">
-        <Link to="/checkout" className="navbar-link">
-          <FaMoneyBillWave size={24} />
-          <span>Checkout</span>
+      <div className="navbar-links">
+        <Link to="/auth" className="auth-link">Login / Sign Up</Link>
+        <Link to="/cart" className="cart-link">
+          Cart ({cartItemCount})
         </Link>
       </div>
     </nav>

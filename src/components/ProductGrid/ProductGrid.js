@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import ProductCard from '../ProductCard/ProductCard'; 
-import { fetchProducts } from '../api'; 
+import React from 'react';
+import ProductCard from '../ProductCard/ProductCard';
+import './ProductGrid.css';
 
-const ProductGrid = () => {
-  const [products, setProducts] = useState([]);
+const ProductGrid = ({ products }) => {
+  console.log('ProductGrid - Received products:', products); // Debug log
 
-  useEffect(() => {
-    fetchProducts().then((data) => setProducts(data));
-  }, []);
+  if (!products || products.length === 0) {
+    return <div className="no-products">No products found matching your criteria.</div>;
+  }
 
   return (
     <div className="product-grid">
