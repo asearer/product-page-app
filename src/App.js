@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import { fetchProducts } from "./components/api";
 import './App.css';
 import { CartProvider } from './context/CartContext';
+import Contact from './components/Contact/Contact';
 
 // Wrapper component to handle the layout and routing
 const AppContent = () => {
@@ -91,6 +92,7 @@ const AppContent = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
     </div>

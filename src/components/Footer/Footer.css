@@ -1,70 +1,172 @@
 /* src/components/Footer/Footer.css */
 
 .footer {
-  background-color: var(--primary-color);
+  background-color: #4CAF50;
   color: white;
-  padding: 30px 20px;
-  position: relative;
-  bottom: 0;
+  padding: 60px 40px 20px;
   width: 100%;
-  text-align: center;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+  gap: 60px;
 }
 
-.footer-left {
-  font-size: 1rem;
-}
-
-.footer-center {
+.footer-left, .footer-center, .footer-right {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer h3 {
+  margin-bottom: 25px;
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.footer-left p {
+  line-height: 1.6;
+  margin: 0;
+  color: #f5f5f5;
 }
 
 .footer-links {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .footer-links li {
-  margin: 0 15px;
+  margin: 0;
 }
 
-.footer-links li a {
-  color: white;
+.footer-links a {
+  color: #f5f5f5;
   text-decoration: none;
+  transition: color 0.3s ease;
   font-size: 1rem;
 }
 
-.footer-links li a:hover {
-  text-decoration: underline;
+.footer-links a:hover {
+  color: #333;
 }
 
-.footer-right {
+.social-section {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .social-icons {
   display: flex;
-  gap: 15px;
+  gap: 25px;
+  margin-top: 20px;
 }
 
 .social-icons a {
   color: white;
-  font-size: 1.5rem;
-  text-decoration: none;
+  font-size: 24px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .social-icons a:hover {
-  color: #ffcc00; /* You can change this hover effect to match your brand's color */
+  transform: translateY(-3px);
+  color: #333;
+}
+
+.social-icons a[aria-label="Facebook"]:hover {
+  color: #1877f2;
+}
+
+.social-icons a[aria-label="Twitter"]:hover {
+  color: #1da1f2;
+}
+
+.social-icons a[aria-label="Instagram"]:hover {
+  color: #e4405f;
+}
+
+.social-icons a[aria-label="LinkedIn"]:hover {
+  color: #0077b5;
+}
+
+.social-icons a[aria-label="YouTube"]:hover {
+  color: #ff0000;
+}
+
+.footer-bottom {
+  margin-top: 60px;
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #f5f5f5;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 20px 20px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-left, .footer-center, .footer-right {
+    align-items: center;
+  }
+
+  .social-section {
+    align-items: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .footer-links {
+    align-items: center;
+  }
+
+  .footer h3 {
+    margin-bottom: 20px;
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 15px 15px;
+  }
+
+  .footer-content {
+    gap: 30px;
+  }
+
+  .social-icons {
+    gap: 20px;
+  }
+
+  .social-icons a {
+    font-size: 22px;
+  }
 }

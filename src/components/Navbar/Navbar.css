@@ -1,66 +1,44 @@
 /* General Navbar Styling */
 .navbar {
+  background-color: #4CAF50;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
-  background-color: var(--primary-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand a {
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Left, Center, and Right Navbar Elements */
-.navbar-left,
-.navbar-center,
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-/* Navbar Links Styling */
-.navbar-link {
-  display: flex;
-  align-items: center;
   text-decoration: none;
-  color: white;
-  margin: 0 15px;
-  font-size: 1.1em;
+  font-size: 1.5rem;
   font-weight: bold;
-  transition: color 0.3s ease;
 }
 
-/* Icon Styling */
-.navbar-link svg {
-  margin-right: 8px; /* Space between icon and text */
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 
-/* Hover Effect for Links */
-.navbar-link:hover {
-  color: #f1f1f1;
-}
-
-/* Adjusting for Cart item count */
-.navbar-link span {
-  font-size: 1em;
+.nav-link, .cart-link {
   color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: opacity 0.3s ease;
 }
 
-/* Responsive Design for Mobile */
+.nav-link:hover, .cart-link:hover {
+  opacity: 0.8;
+}
+
 @media (max-width: 768px) {
   .navbar {
-    padding: 15px 20px;
+    padding: 1rem;
   }
 
-  .navbar-left,
-  .navbar-center,
-  .navbar-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .navbar-link {
-    margin: 10px 0;
+  .navbar-links {
+    gap: 1rem;
   }
 }
 

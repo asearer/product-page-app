@@ -1,14 +1,20 @@
 import React from "react";
 import { useCart } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 
 const Cart = () => {
   const { cartItems, addToCart, removeFromCart, deleteFromCart } = useCart();
+  const navigate = useNavigate();
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * (item.quantity || 1),
     0
   );
+
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
 
   return (
     <div className="cart">
@@ -54,6 +60,12 @@ const Cart = () => {
           </ul>
           <div className="cart-summary">
             <h3>Total: ${totalPrice.toFixed(2)}</h3>
+            <button 
+              onClick={handleCheckout}
+              className="checkout-button"
+            >
+              Proceed to Checkout
+            </button>
           </div>
         </>
       )}

@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
-import { FaHome, FaShoppingCart, FaMoneyBillWave } from "react-icons/fa"; // Importing icons from react-icons
-import "../Navbar/Navbar.css";
+import "./Navbar.css";
 
 const Navbar = () => {
   const { cartItems } = useCart();
@@ -16,7 +15,7 @@ const Navbar = () => {
         <Link to="/">Shop</Link>
       </div>
       <div className="navbar-links">
-        <Link to="/auth" className="auth-link">Login / Sign Up</Link>
+        <Link to="/auth" className="nav-link">Account</Link>
         <Link to="/cart" className="cart-link">
           Cart ({cartItemCount})
         </Link>
