@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
-
+// Testing Only
     // Add default admin account if it doesn't exist
     const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
     if (!storedUsers.some(user => user.email === 'admin@test.test')) {
