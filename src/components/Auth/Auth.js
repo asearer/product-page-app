@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
 import './Auth.css';
 
 const Auth = () => {
+  const navigate = useNavigate();
+  const { login } = useUser();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -9,23 +13,81 @@ const Auth = () => {
     confirmPassword: '',
     name: ''
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all required fields');
+      return false;
+    }
+
+    if (!isLogin && formData.password !== formData.confirmPassword) {
+      setError("Passwords don't match");
+      return false;
+    }
+
+    if (!isLogin && formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isLogin) {
-      // Handle login
-      console.log('Login with:', formData.email, formData.password);
-    } else {
-      // Handle signup
-      if (formData.password !== formData.confirmPassword) {
-        alert("Passwords don't match!");
-        return;
+    setError('');
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      if (isLogin) {
+        await login(formData.email, formData.password);
+        navigate('/');
+      } else {
+        // Handle signup
+        const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        
+        // Check if email already exists
+        if (storedUsers.some(user => user.email === formData.email)) {
+          throw new Error('Email already registered');
+        }
+
+        // Store new user
+        const newUser = {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password, // In a real app, this should be hashed
+          signupDate: new Date().toISOString()
+        };
+
+        storedUsers.push(newUser);
+        localStorage.setItem('users', JSON.stringify(storedUsers));
+
+        // Auto-login after signup
+        await login(formData.email, formData.password);
+        navigate('/');
       }
-      console.log('Sign up with:', formData);
+    } catch (err) {
+      setError(err.message || 'An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleChange = (e) => {
+    setError('');
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -36,6 +98,7 @@ const Auth = () => {
     <div className="auth-container">
       <div className="auth-box">
         <h2>{isLogin ? 'Login' : 'Create Account'}</h2>
+        {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
           {!isLogin && (
             <div className="form-group">
@@ -46,6 +109,7 @@ const Auth = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
+                disabled={loading}
               />
             </div>
           )}
@@ -57,6 +121,7 @@ const Auth = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              disabled={loading}
             />
           </div>
           <div className="form-group">
@@ -67,6 +132,7 @@ const Auth = () => {
               value={formData.password}
               onChange={handleChange}
               required
+              disabled={loading}
             />
           </div>
           {!isLogin && (
@@ -78,18 +144,33 @@ const Auth = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
+                disabled={loading}
               />
             </div>
           )}
-          <button type="submit" className="auth-button">
-            {isLogin ? 'Login' : 'Sign Up'}
+          <button 
+            type="submit" 
+            className="auth-button"
+            disabled={loading}
+          >
+            {loading ? 'Please wait...' : (isLogin ? 'Login' : 'Sign Up')}
           </button>
         </form>
         <p className="auth-switch">
           {isLogin ? "Don't have an account? " : "Already have an account? "}
           <button
             className="switch-button"
-            onClick={() => setIsLogin(!isLogin)}
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setError('');
+              setFormData({
+                email: '',
+                password: '',
+                confirmPassword: '',
+                name: ''
+              });
+            }}
+            disabled={loading}
           >
             {isLogin ? 'Sign Up' : 'Login'}
           </button>

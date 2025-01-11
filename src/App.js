@@ -12,6 +12,7 @@ import { fetchProducts } from "./components/api";
 import './App.css';
 import { CartProvider } from './context/CartContext';
 import Contact from './components/Contact/Contact';
+import { UserProvider } from './context/UserContext';
 
 // Wrapper component to handle the layout and routing
 const AppContent = () => {
@@ -102,13 +103,15 @@ const AppContent = () => {
 // Main App component
 const App = () => {
   return (
-    <CartProvider>
-      <Router>
-        <Navbar />
-        <AppContent />
-        <Footer />
-      </Router>
-    </CartProvider>
+    <UserProvider>
+      <CartProvider>
+        <Router>
+          <Navbar />
+          <AppContent />
+          <Footer />
+        </Router>
+      </CartProvider>
+    </UserProvider>
   );
 };
 

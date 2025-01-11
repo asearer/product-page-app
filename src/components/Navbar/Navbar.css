@@ -32,6 +32,27 @@
   opacity: 0.8;
 }
 
+.welcome-text {
+  color: white;
+  font-size: 1rem;
+}
+
+.logout-button {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.logout-button:hover {
+  background-color: white;
+  color: #4CAF50;
+}
+
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
@@ -39,6 +60,10 @@
 
   .navbar-links {
     gap: 1rem;
+  }
+
+  .welcome-text {
+    display: none;
   }
 }
 
